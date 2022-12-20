@@ -1,4 +1,6 @@
-﻿namespace Domain.Entites
+﻿using Domain.ValueObjects;
+
+namespace Domain.Entites
 {
     public class Room
     {
@@ -6,6 +8,7 @@
         public string Name { get; set; }
         public int Level { get; set; }
         public bool InMaintnance { get; set; }
+        public Price Price { get; set; }
         public bool IsAvailable
         {
             get
