@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Data
+namespace Data.GuestData
 {
     public class GuestConfiguration : IEntityTypeConfiguration<Guest>
     {
-       public void Configure(EntityTypeBuilder<Guest> builder)
+        public void Configure(EntityTypeBuilder<Guest> builder)
         {
             builder.HasKey(x => x.Id);
             builder.OwnsOne(x => x.DocumentId)

@@ -1,4 +1,6 @@
-﻿using Domain.Entites;
+﻿using Data.GuestData;
+using Data.RoomData;
+using Domain.Entites;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data
