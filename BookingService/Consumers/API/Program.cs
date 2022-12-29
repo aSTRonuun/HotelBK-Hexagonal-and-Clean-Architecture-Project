@@ -1,8 +1,12 @@
 using Application.GuestApplication;
 using Application.GuestApplication.Ports;
+using Application.Room;
+using Application.Room.Ports;
 using Data;
 using Data.GuestData;
-using Domain.Guest.Ports;
+using Data.RoomData;
+using Domain.GuestDomain.Ports;
+using Domain.RoomDomain.Ports;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +18,8 @@ builder.Services.AddControllers();
 #region IoC
 builder.Services.AddScoped<IGuestManeger, GuestManager>();
 builder.Services.AddScoped<IGuestRepository, GuestRepository>();
+builder.Services.AddScoped<IRoomManager, RoomManager>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 #endregion IoC
 
 #region DB wiring up

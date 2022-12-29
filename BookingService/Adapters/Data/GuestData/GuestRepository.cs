@@ -1,5 +1,5 @@
-﻿using Domain.Guest.Entites;
-using Domain.Guest.Ports;
+﻿using Domain.GuestDomain.Entities;
+using Domain.GuestDomain.Ports;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.GuestData

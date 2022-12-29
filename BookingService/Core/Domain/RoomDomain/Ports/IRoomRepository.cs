@@ -2,7 +2,7 @@
 
 namespace Domain.RoomDomain.Ports
 {
-    interface IRoomRepository
+    public interface IRoomRepository
     {
         Task<int> Create(Room room);
         Task<Room?> Get(int id);

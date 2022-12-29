@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using Domain.Room.Entities;
+using Domain.RoomDomain.Entities;
 
 namespace Data.RoomData
 {

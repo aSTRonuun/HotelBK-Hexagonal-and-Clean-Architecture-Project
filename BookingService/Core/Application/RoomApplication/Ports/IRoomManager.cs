@@ -1,4 +1,7 @@
-﻿namespace Application.Room.Ports
+﻿using Application.RoomApplication.Requests;
+using Application.RoomApplication.Responses;
+
+namespace Application.Room.Ports
 {
     public interface IRoomManager
     {
