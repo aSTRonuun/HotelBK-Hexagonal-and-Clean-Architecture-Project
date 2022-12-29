@@ -1,5 +1,6 @@
-﻿using Domain.Entites;
-using Domain.Ports;
+﻿using Domain.Guest.Entites;
+using Domain.Guest.Ports;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.GuestData
 {
@@ -17,9 +18,9 @@ namespace Data.GuestData
             await _hotelDbContext.SaveChangesAsync();
             return guest.Id;
         }
-        public Task<Guest> Get(int id)
+        public async Task<Guest?> Get(int id)
         {
-            throw new NotImplementedException();
+            return await _hotelDbContext.Guests.Where(g => g.Id == id).FirstOrDefaultAsync();
         }
     }
 }

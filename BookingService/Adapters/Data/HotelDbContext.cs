@@ -1,6 +1,7 @@
 ﻿using Data.GuestData;
 using Data.RoomData;
-using Domain.Entites;
+using Domain.GuestDomain.Entities;
+using Domain.Room.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data

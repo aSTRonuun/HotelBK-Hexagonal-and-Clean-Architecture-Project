@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="RoomDomain\Exceptions\" />
+    <Folder Include="GuestDomain\Entities\" />
+  </ItemGroup>
+
 </Project>

@@ -1,8 +1,8 @@
-using Application;
-using Application.Guest.Ports;
+using Application.GuestApplication;
+using Application.GuestApplication.Ports;
 using Data;
 using Data.GuestData;
-using Domain.Ports;
+using Domain.Guest.Ports;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

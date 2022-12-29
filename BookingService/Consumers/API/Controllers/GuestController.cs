@@ -1,8 +1,8 @@
 ﻿using Application;
 using Application.Guest.DTO;
-using Application.Guest.Ports;
 using Application.Guest.Requests;
 using Application.Guest.Responses;
+using Application.GuestApplication.Ports;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -32,7 +32,7 @@ namespace API.Controllers
 
             if (response.Success) return Created("", response.Data);
 
-            if (response.ErrorCode == ErrorCodes.NOT_FOUND) return BadRequest(response);
+            if (response.ErrorCode == ErrorCodes.NOT_FOUND) return NotFound(response);
             if (response.ErrorCode == ErrorCodes.INVALID_EMAIL) return BadRequest(response);
             if (response.ErrorCode == ErrorCodes.INVALID_PERSON_ID) return BadRequest(response);
             if (response.ErrorCode == ErrorCodes.MISSING_REQUIRED_INFORMATION) return BadRequest(response);
@@ -40,6 +40,16 @@ namespace API.Controllers
 
             _logger.LogError("Response with unknow ErrorCode Returned", response);
             return BadRequest(500);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<GuestDTO>> Get(int guestId)
+        {
+            var response = await _guestManeger.GetGuest(guestId);
+
+            if (response.Success) return Created("", response.Data);
+
+            return NotFound(response);
         }
     }
 }

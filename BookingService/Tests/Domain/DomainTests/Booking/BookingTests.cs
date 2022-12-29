@@ -1,7 +1,7 @@
-﻿using Domain.Entites;
-using Domain.Enuns;
+﻿using Domain.GuestDomain.Entities;
+using Domain.GuestDomain.Enuns;
 using NUnit.Framework;
-using Action = Domain.Enuns.Action;
+using Action = Domain.GuestDomain.Enuns.Action;
 
 namespace DomainTests.Bookings
 {

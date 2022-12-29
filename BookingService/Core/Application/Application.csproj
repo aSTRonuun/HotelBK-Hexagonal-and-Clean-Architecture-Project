@@ -10,4 +10,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RoomApplication\DTO\" />
+    <Folder Include="RoomApplication\Responses\" />
+    <Folder Include="RoomApplication\Requests\" />
+  </ItemGroup>
+
 </Project>
