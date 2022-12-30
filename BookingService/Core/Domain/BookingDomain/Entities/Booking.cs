@@ -1,8 +1,11 @@
-﻿using Domain.GuestDomain.Enuns;
+﻿using Domain.BookingDomain.Exceptions;
+using Domain.BookingDomain.Ports;
+using Domain.GuestDomain.Entities;
+using Domain.GuestDomain.Enuns;
 using Domain.RoomDomain.Entities;
 using Action = Domain.GuestDomain.Enuns.Action;
 
-namespace Domain.GuestDomain.Entities
+namespace Domain.BookingDomain.Entities
 {
     public class Booking
     {
@@ -30,6 +33,29 @@ namespace Domain.GuestDomain.Entities
                 (Status.Canceled, Action.Reopen) => Status.Created,
                 _ => Status
             };
+        }
+
+        private void ValidateState()
+        {
+            if (this.PlacedAt == null) { throw new PlacedAtIsARequiredInformationException(); }
+            if (this.Start == null) { }
+            if (this.End == null) { }
+            if (this.Room == null) { }
+            if (this.Guest == null) { }
+        }
+
+        public async Task Save(IBookingRepository bookingRepository)
+        {
+            this.ValidateState();
+
+            if(this.Id == 0)
+            {
+                this.Id = await bookingRepository.Create(this);
+            }
+            else
+            {
+
+            }
         }
     }
 }

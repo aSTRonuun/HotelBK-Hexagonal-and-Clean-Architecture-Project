@@ -1,4 +1,4 @@
-﻿using Domain.GuestDomain.Entities;
+﻿using Domain.BookingDomain.Entities;
 using Domain.GuestDomain.Enuns;
 using NUnit.Framework;
 using Action = Domain.GuestDomain.Enuns.Action;

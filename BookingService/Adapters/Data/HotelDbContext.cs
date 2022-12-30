@@ -1,5 +1,6 @@
 ﻿using Data.GuestData;
 using Data.RoomData;
+using Domain.BookingDomain.Entities;
 using Domain.GuestDomain.Entities;
 using Domain.RoomDomain.Entities;
 using Microsoft.EntityFrameworkCore;
