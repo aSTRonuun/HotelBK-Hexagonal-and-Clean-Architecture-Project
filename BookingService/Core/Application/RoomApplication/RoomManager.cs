@@ -24,6 +24,8 @@ namespace Application.Room
 
                 await room.Save(_roomRepository);
 
+                request.Data.Id = room.Id;
+
                 return new RoomResponse
                 {
                     Success = true,

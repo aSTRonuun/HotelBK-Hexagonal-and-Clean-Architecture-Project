@@ -1,10 +1,11 @@
 ﻿using Application.BookingApplication.Dtos;
+using Application.BookingApplication.Responses;
 
 namespace Application.BookingApplication.Ports
 {
     public interface IBookingManager
     {
-        Task<BookingDto> CreateBooking(BookingDto booking);
-        Task<BookingDto> GetBooking(int id);
+        Task<BookingResponse> CreateBooking(BookingDto booking);
+        Task<BookingResponse> GetBooking(int id);
     }
 }

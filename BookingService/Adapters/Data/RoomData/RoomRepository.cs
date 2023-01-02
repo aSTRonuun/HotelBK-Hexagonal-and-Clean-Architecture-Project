@@ -20,9 +20,18 @@ namespace Data.RoomData
             return room.Id;
         }
 
-        public Task<Room?> Get(int id)
+        public Task<Room> Get(int Id)
         {
-            return _hotelDbContext.Rooms.Where(x => x.Id == id).FirstOrDefaultAsync();
+            return _hotelDbContext.Rooms
+                .Where(x => x.Id == Id)
+                .FirstOrDefaultAsync();
+        }
+
+        public Task<Room> GetAggregate(int Id)
+        {
+            return _hotelDbContext.Rooms
+                .Include(x => x.Bookings)
+                .Where(x => x.Id == Id).FirstOrDefaultAsync();
         }
     }
 }

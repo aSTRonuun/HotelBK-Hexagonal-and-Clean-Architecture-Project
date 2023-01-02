@@ -1,6 +1,7 @@
 ﻿using Application;
 using Application.BookingApplication.Dtos;
 using Application.BookingApplication.Ports;
+using Application.BookingApplication.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -26,15 +27,16 @@ namespace API.Controllers
                 Data = booking
             };
 
-            var response = await _bookingManager.CreateBooking(request);
+            var response = await _bookingManager.CreateBooking(request.Data);
 
             if (response.Success) return Created("", response.Data);
 
-            if (response.ErrorCode == ErrorCodes.BOOKING_MISSING_REQUIRED_INFORMATION) return BadRequest(response);
-            if (response.ErrorCode == ErrorCodes.BOOKING_COULD_NOT_STORE) return BadRequest(response);
-            if (response.ErrorCode == ErrorCodes.BOOKING_GUEST_NOT_FOUND) return BadRequest(response);
-            if (response.ErrorCode == ErrorCodes.BOOKING_ROOM_NOT_FOUND) return BadRequest(response);
-            if (response.ErrorCode == ErrorCodes.BOOKING_ROOM_NOT_AVAILABLE) return BadRequest(response);
+            if (response.ErrorCode == ErrorCodes.BOOKING_PLACEDAT_MISSING_REQUIRED_INFOMRATION) return BadRequest(response);
+            if (response.ErrorCode == ErrorCodes.BOOKING_START_MISSING_REQUIRED_INFOMRATION) return BadRequest(response);
+            if (response.ErrorCode == ErrorCodes.BOOKING_END_MISSING_REQUIRED_INFOMRATION) return BadRequest(response);
+            if (response.ErrorCode == ErrorCodes.BOOKING_GUEST_MISSING_REQUIRED_INFORMATION) return BadRequest(response);
+            if (response.ErrorCode == ErrorCodes.BOOKING_END_MISSING_REQUIRED_INFOMRATION) return BadRequest(response);
+            if (response.ErrorCode == ErrorCodes.BOOKING_ROOM_CANNOT_BE_BOOKED) return BadRequest(response);
 
             _logger.LogError("Response with unknow ErrorCode Returned", response);
             return BadRequest(500);

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.BookingData
 {
-    internal class BookingRepository : IBookingRepository
+    public class BookingRepository : IBookingRepository
     {
         private HotelDbContext _hotelDbContext;
 

@@ -11,7 +11,8 @@ namespace Domain.BookingDomain.Entities
     {
         public Booking()
         {
-            Status = Status.Created;
+            this.Status = Status.Created;
+            this.PlacedAt = DateTime.UtcNow;
         }
         public int Id { get; set; }
         public DateTime PlacedAt { get; set; }
@@ -19,12 +20,10 @@ namespace Domain.BookingDomain.Entities
         public DateTime End { get; set; }
         public Room Room { get; set; }
         public Guest Guest { get; set; }
-        private Status Status { get; set; }
-        public Status CurrentStatus { get { return Status; } }
-
+        public Status Status { get; set; }
         public void ChangeState(Action action)
         {
-            Status = (Status, action) switch
+            this.Status = (this.Status, action) switch
             {
                 (Status.Created, Action.Pay) => Status.Paid,
                 (Status.Created, Action.Cancel) => Status.Canceled,
@@ -37,18 +36,21 @@ namespace Domain.BookingDomain.Entities
 
         private void ValidateState()
         {
-            if (this.PlacedAt == null) { throw new PlacedAtIsARequiredInformationException(); }
-            if (this.Start == null) { }
-            if (this.End == null) { }
-            if (this.Room == null) { }
-            if (this.Guest == null) { }
+            if (this.PlacedAt == default(DateTime)) { throw new PlacedAtIsARequiredInformationException(); }
+            if (this.Start == default(DateTime)) { throw new StartIsARequiredInformationException(); }
+            if (this.End == default(DateTime)) { throw new EndIsARequiredInformationException(); }
+            if (this.Room == null) { throw new RoomIsARequiredInformationException(); }
+            if (this.Guest == null) { throw new GuestIsARequiredInfomationException(); }
         }
 
         public async Task Save(IBookingRepository bookingRepository)
         {
             this.ValidateState();
+            
+            this.Guest.IsValidate();
+            if (!this.Room.CanBeBooked()) { throw new RoomCannotBeBookedException(); }
 
-            if(this.Id == 0)
+            if (this.Id == 0)
             {
                 this.Id = await bookingRepository.Create(this);
             }
