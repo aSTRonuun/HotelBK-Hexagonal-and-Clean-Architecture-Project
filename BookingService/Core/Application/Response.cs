@@ -26,6 +26,10 @@
         BOOKING_GUEST_MISSING_REQUIRED_INFORMATION = 205,
         BOOKING_ROOM_MISSING_REQUIRED_INFORMATION = 206,
         BOOKING_ROOM_CANNOT_BE_BOOKED = 207,
+
+        // Payment related codes 500 to 1500
+        PAYMENT_INVALID_PAYMENT_INTENTION = 500,
+        PAYMENT_PROVICER_NOT_IMPLMENTED = 501,
     }
     public abstract class Response
     {

@@ -12,6 +12,8 @@ using Domain.BookingDomain.Ports;
 using Domain.GuestDomain.Ports;
 using Domain.RoomDomain.Ports;
 using Microsoft.EntityFrameworkCore;
+using Domain.PaymentDomain.Ports;
+using Application.MercadoPago;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +28,7 @@ builder.Services.AddScoped<IRoomManager, RoomManager>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<IBookingManager, BookingManager>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<IMercadoPagoPaymentService, MercadoPagoAdapter>();
 #endregion IoC
 
 #region DB wiring up
