@@ -29,7 +29,7 @@
 
         // Payment related codes 500 to 1500
         PAYMENT_INVALID_PAYMENT_INTENTION = 500,
-        PAYMENT_PROVICER_NOT_IMPLMENTED = 501,
+        PAYMENT_PROVIDER_NOT_IMPLMENTED = 501,
     }
     public abstract class Response
     {

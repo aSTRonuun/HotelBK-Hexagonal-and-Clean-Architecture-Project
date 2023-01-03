@@ -125,7 +125,7 @@ namespace Application.BookingApplication
                 {
                     Success = true,
                     Data = response.Data,
-                    Message = "Payment succeessfuly processd"
+                    Message = "Payment successfully processed"
                 };
             }
             return response;

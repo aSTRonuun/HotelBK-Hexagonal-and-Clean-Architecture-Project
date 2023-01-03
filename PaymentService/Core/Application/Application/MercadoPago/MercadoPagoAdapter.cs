@@ -22,7 +22,7 @@ namespace Application.MercadoPago
                 var dto = new PaymentStateDto
                 {
                     CreatedDate = DateTime.UtcNow,
-                    Message = $"Successfully paid {paymentIntention}",
+                    Message = $"Successefully paid {paymentIntention}",
                     PaymentId = "123",
                     Status = Status.Success
                 };
@@ -31,7 +31,7 @@ namespace Application.MercadoPago
                 {
                     Data = dto,
                     Success = true,
-                    Message = "Payment successfully processed"
+                    Message = "Payment successefully processed"
                 };
 
                 return Task.FromResult(response);
