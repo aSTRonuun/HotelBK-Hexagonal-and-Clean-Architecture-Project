@@ -2,6 +2,8 @@
 using Application.BookingApplication.Dtos;
 using Application.BookingApplication.Ports;
 using Application.BookingApplication.Requests;
+using Application.PaymentApplication.Dtos;
+using Application.PaymentApplication.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -17,6 +19,19 @@ namespace API.Controllers
         {
             _logger = logger;
             _bookingManager = bookingManager;
+        }
+
+        [HttpPost]
+        [Route("{bookingId}/Pay")]
+        public async Task<ActionResult<PaymentResponse>> Pay(
+            PaymentRequestDto paymentRequestDto, int bookingId)
+        {
+            paymentRequestDto.BookingId = bookingId;
+            var res = await _bookingManager.PayForABooking(paymentRequestDto);
+
+            if (res.Success) return Ok(res.Data);
+
+            return BadRequest(res);
         }
 
         [HttpPost]
