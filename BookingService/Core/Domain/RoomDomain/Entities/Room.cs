@@ -41,6 +41,10 @@ namespace Domain.RoomDomain.Entities
             {
                 throw new InvalidRoomDataException();
             }
+            if (this.Price.Value < 10 )
+            {
+                throw new InvalidPriceValueException();
+            }
         }
 
         public bool CanBeBooked()

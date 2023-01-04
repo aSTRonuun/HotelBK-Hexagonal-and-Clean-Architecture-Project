@@ -1,7 +1,10 @@
 ﻿using Application;
+using Application.BookingApplication.Commands;
 using Application.Room.Ports;
+using Application.RoomApplication.Commands;
 using Application.RoomApplication.DTO;
 using Application.RoomApplication.Requests;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -12,22 +15,27 @@ namespace API.Controllers
     {
         private readonly ILogger<RoomController> _logger;
         private readonly IRoomManager _roomManager;
+        private readonly IMediator _mediator;
 
-        public RoomController(ILogger<RoomController> logger, IRoomManager roomManager)
+        public RoomController(
+            ILogger<RoomController> logger, 
+            IRoomManager roomManager,
+            IMediator mediator)
         {
             _logger = logger;
             _roomManager = roomManager;
+            _mediator = mediator;
         }
-        
+
         [HttpPost]
         public async Task<ActionResult<RoomDTO>> Post(RoomDTO room)
         {
-            var request = new CreateRoomRequest
+            var command = new CreateRoomCommand
             {
-                Data = room
+                RoomDTO = room
             };
 
-            var response = await _roomManager.CreateRoom(request);
+            var response = await _mediator.Send(command);
 
             if (response.Success) return Created("", response.Data);
 
