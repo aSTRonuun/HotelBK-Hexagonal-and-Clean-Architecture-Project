@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BookingApplication\NovaPasta\**" />
+    <EmbeddedResource Remove="BookingApplication\NovaPasta\**" />
+    <None Remove="BookingApplication\NovaPasta\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Adapters\Data\Data.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>

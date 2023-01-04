@@ -1,9 +1,12 @@
 ﻿using Application;
+using Application.BookingApplication.Commands;
 using Application.BookingApplication.Dtos;
 using Application.BookingApplication.Ports;
+using Application.BookingApplication.Queries;
 using Application.BookingApplication.Requests;
 using Application.PaymentApplication.Dtos;
 using Application.PaymentApplication.Responses;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -14,11 +17,16 @@ namespace API.Controllers
     {
         private readonly ILogger<BookingController> _logger;
         private readonly IBookingManager _bookingManager;
+        private readonly IMediator _mediator;
 
-        public BookingController(ILogger<BookingController> logger, IBookingManager bookingManager)
+        public BookingController(
+            ILogger<BookingController> logger, 
+            IBookingManager bookingManager, 
+            IMediator mediator)
         {
             _logger = logger;
             _bookingManager = bookingManager;
+            _mediator = mediator;
         }
 
         [HttpPost]
@@ -37,12 +45,12 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<BookingDto>> Post(BookingDto booking)
         {
-            var request = new CreateBookingRequest
+            var command = new CreateBookingCommand
             {
-                Data = booking
+                BookingDto = booking
             };
 
-            var response = await _bookingManager.CreateBooking(request.Data);
+            var response = await _mediator.Send(command);
 
             if (response.Success) return Created("", response.Data);
 
@@ -54,6 +62,22 @@ namespace API.Controllers
             if (response.ErrorCode == ErrorCodes.BOOKING_ROOM_CANNOT_BE_BOOKED) return BadRequest(response);
 
             _logger.LogError("Response with unknow ErrorCode Returned", response);
+            return BadRequest(500);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<BookingDto>> Get(int Id)
+        {
+            var query = new GetBookingQuery
+            {
+                Id = Id
+            };
+
+            var res = await _mediator.Send(query);
+
+            if (res.Success) return Created("", res.Data);
+
+            _logger.LogError("Could not process the request", res);
             return BadRequest(500);
         }
     }
