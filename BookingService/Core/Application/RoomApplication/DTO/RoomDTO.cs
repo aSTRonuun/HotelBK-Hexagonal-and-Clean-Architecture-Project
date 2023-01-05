@@ -26,5 +26,16 @@ namespace Application.RoomApplication.DTO
                 }
             };
         }
+
+        public static RoomDTO MapToDto(Domain.RoomDomain.Entities.Room room)
+        {
+            return new RoomDTO
+            {
+                Id = room.Id,
+                Name = room.Name,
+                Level = room.Level,
+                InMaintenance = room.InMaintnance
+            };
+        }
     }
 }

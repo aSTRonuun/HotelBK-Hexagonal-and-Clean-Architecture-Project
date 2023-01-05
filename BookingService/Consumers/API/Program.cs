@@ -16,12 +16,14 @@ using Application.MercadoPago;
 using Application.PaymentApplication.Ports;
 using System.Text.Json.Serialization;
 using Payment.Application;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddMediatR(typeof(BookingManager));
 
 #region IoC
 builder.Services.AddScoped<IGuestManeger, GuestManager>();

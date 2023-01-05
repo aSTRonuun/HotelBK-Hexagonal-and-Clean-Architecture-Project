@@ -23,7 +23,10 @@ namespace Data.BookingData
         public async Task<Booking?> Get(int Id)
         {
             return await _hotelDbContext.Bookings
-                .Where(b => b.Id == Id).FirstOrDefaultAsync();
+                .Where(b => b.Id == Id)
+                .Include(b => b.Guest)
+                .Include(b => b.Room)
+                .FirstOrDefaultAsync();
         }
     }
 }
